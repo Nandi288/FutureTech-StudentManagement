@@ -47,7 +47,8 @@ builder.Services.AddAuthorization(options =>
             // Get the user's email from their Google/GitHub account
             var userEmail = context.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
 
-            // List of allowed admin emails (ADD YOUR GROUP MEMBERS' EMAILS HERE)
+            // Role based access
+            // List of allowed admin emails 
             var adminEmails = new List<string>
             {
                 "nandishandu51@gmail.com",           
