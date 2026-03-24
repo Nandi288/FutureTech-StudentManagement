@@ -1,0 +1,91 @@
+﻿@model FutureTech_StudentManagement.Models.StudentViewModel
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card-dashboard bg-white p-4">
+            <h4 class="fw-bold text-primary mb-4">
+                <i class="fas fa-edit me-2"></i>Edit Student
+            </h4>
+
+            <form asp-action="Edit" enctype="multipart/form-data" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="ExistingProfileImageUrl" />
+
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3" role="alert"></div>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label asp-for="FirstName" class="form-label fw-semibold"></label>
+                        <input asp-for="FirstName" class="form-control form-control-lg rounded-3" />
+                        <span asp-validation-for="FirstName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="LastName" class="form-label fw-semibold"></label>
+                        <input asp-for="LastName" class="form-control form-control-lg rounded-3" />
+                        <span asp-validation-for="LastName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label fw-semibold"></label>
+                        <input asp-for="Email" class="form-control form-control-lg rounded-3" type="email" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="MobileNumber" class="form-label fw-semibold"></label>
+                        <input asp-for="MobileNumber" class="form-control form-control-lg rounded-3" type="tel" />
+                        <span asp-validation-for="MobileNumber" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="EnrolmentStatus" class="form-label fw-semibold"></label>
+                        <select asp-for="EnrolmentStatus" class="form-select form-select-lg rounded-3">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                        <span asp-validation-for="EnrolmentStatus" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="ProfilePicture" class="form-label fw-semibold"></label>
+                        <input asp-for="ProfilePicture" class="form-control form-control-lg rounded-3" type="file" accept=".jpg,.jpeg,.png" />
+                        <small class="text-muted">Leave empty to keep current picture</small>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.ExistingProfileImageUrl))
+                    {
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Current Picture</label>
+                            <div>
+                                <img src="@Model.ExistingProfileImageUrl" alt="Current Profile"
+                                     class="img-thumbnail rounded-3" style="max-width: 150px;" />
+                            </div>
+                        </div>
+                    }
+
+                    <div class="col-12 mt-4">
+                        <hr />
+                        <div class="d-flex gap-3 justify-content-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary rounded-3 px-4 py-2">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-custom-primary rounded-3 px-5 py-2">
+                                <i class="fas fa-save me-2"></i>Update Student
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

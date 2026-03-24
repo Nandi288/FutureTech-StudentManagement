@@ -1,0 +1,61 @@
+﻿@model FutureTech_StudentManagement.Models.Student
+@{
+    ViewData["Title"] = "Delete Student";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card-dashboard bg-white p-4 text-center">
+            <div class="mb-4">
+                <div class="rounded-circle bg-danger bg-opacity-10 d-inline-flex p-4 mb-3">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger"></i>
+                </div>
+                <h4 class="fw-bold text-danger">Delete Student</h4>
+                <p class="text-muted">Are you sure you want to delete this student? This action cannot be undone.</p>
+            </div>
+
+            <div class="bg-light p-4 rounded-3 mb-4">
+                @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+                {
+                    <img src="@Model.ProfileImageUrl" alt="@Model.FullName"
+                         class="rounded-circle mb-3" style="width: 80px; height: 80px; object-fit: cover;">
+                }
+                else
+                {
+                    <div class="rounded-circle bg-secondary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3"
+                         style="width: 80px; height: 80px;">
+                        <span class="fs-1 fw-bold text-secondary">@Model.FirstName[0]@Model.LastName[0]</span>
+                    </div>
+                }
+
+                <h5 class="fw-bold mb-1">@Model.FullName</h5>
+                <p class="text-muted mb-2">@Model.Email</p>
+                <span class="@(Model.EnrolmentStatus == "Active" ? "badge-active" : "badge-inactive")">
+                    @Model.EnrolmentStatus
+                </span>
+            </div>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+
+                <div class="form-check mb-4 text-start">
+                    <input class="form-check-input" type="checkbox" name="hardDelete" id="hardDelete" value="true" />
+                    <label class="form-check-label" for="hardDelete">
+                        <span class="fw-bold">Permanently delete</span>
+                        <br>
+                        <small class="text-muted">Remove from database and delete image</small>
+                    </label>
+                </div>
+
+                <div class="d-flex gap-3 justify-content-center">
+                    <a asp-action="Index" class="btn btn-outline-secondary rounded-3 px-4 py-2">
+                        <i class="fas fa-times me-2"></i>Cancel
+                    </a>
+                    <button type="submit" class="btn btn-danger rounded-3 px-4 py-2">
+                        <i class="fas fa-trash me-2"></i>Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

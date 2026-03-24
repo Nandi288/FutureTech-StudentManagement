@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Your privacy is important to us. This application stores student information securely in Azure Cosmos DB and images in Azure Blob Storage with SAS token authentication.</p>
+
+<h3>Data Storage</h3>
+<ul>
+    <li>Student personal information is stored in Azure Cosmos DB (encrypted at rest)</li>
+    <li>Profile images are stored in Azure Blob Storage with private access</li>
+    <li>All image access is controlled via time-limited SAS tokens</li>
+    <li>Authentication is handled by Google OAuth 2.0</li>
+</ul>

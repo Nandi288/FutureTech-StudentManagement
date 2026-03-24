@@ -1,0 +1,124 @@
+﻿@model IEnumerable<FutureTech_StudentManagement.Models.Student>
+@{
+    ViewData["Title"] = "Student Management";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-primary">
+        <i class="fas fa-users me-2"></i>Student Management
+    </h2>
+    <a asp-action="Create" class="btn btn-custom-primary">
+        <i class="fas fa-plus-circle me-2"></i>Add New Student
+    </a>
+</div>
+
+<div class="card-dashboard bg-white p-4 mb-4">
+    <form asp-action="Index" method="get" class="row g-3 align-items-center">
+        <div class="col-md-10">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="fas fa-search text-muted"></i>
+                </span>
+                <input type="text" name="searchTerm" class="form-control border-start-0 ps-0"
+                       placeholder="Search by name, surname, or ID..." value="@ViewBag.SearchTerm" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-custom-primary w-100">
+                Search
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="student-table">
+    <table class="table table-hover align-middle mb-0">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Contact</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            @if (ViewData[$"ImageUrl_{student.Id}"] != null)
+                            {
+                                <img src="@ViewData[$"ImageUrl_{student.Id}"]" alt="@student.FullName"
+                                     class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                            }
+                            else
+                            {
+                                <div class="rounded-circle bg-secondary bg-opacity-10 d-flex align-items-center justify-content-center"
+                                     style="width: 50px; height: 50px;">
+                                    <span class="fw-bold text-secondary">@student.FirstName[0]@student.LastName[0]</span>
+                                </div>
+                            }
+                            <div>
+                                <h6 class="fw-bold mb-0">@student.FullName</h6>
+                                <small class="text-muted">ID: @student.Id.Substring(0, 8)...</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div><i class="fas fa-envelope me-2 text-muted"></i>@student.Email</div>
+                            <div><i class="fas fa-phone me-2 text-muted"></i>@student.MobileNumber</div>
+                        </div>
+                    </td>
+                    <td>
+                        @if (student.EnrolmentStatus == "Active")
+                        {
+                            <span class="badge-active">
+                                <i class="fas fa-circle me-1" style="font-size: 8px;"></i> Active
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge-inactive">
+                                <i class="fas fa-circle me-1" style="font-size: 8px;"></i> Inactive
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2 justify-content-end">
+                            <a asp-action="Details" asp-route-id="@student.Id" class="btn btn-sm btn-outline-info rounded-circle"
+                               style="width: 35px; height: 35px;" title="View">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-sm btn-outline-warning rounded-circle"
+                               style="width: 35px; height: 35px;" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-sm btn-outline-danger rounded-circle"
+                               style="width: 35px; height: 35px;" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (ViewBag.TotalPages > 1)
+{
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-searchTerm="@ViewBag.SearchTerm">
+                        @i
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
