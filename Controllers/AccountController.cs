@@ -46,13 +46,11 @@ namespace FutureTech_StudentManagement.Controllers
                 return RedirectToAction("Login");
             }
 
-            // ============================================================
-            // ⭐ RBAC: CHECK IF USER'S EMAIL IS IN ADMIN LIST ⭐
-            // ============================================================
+            // Role based access            
             // Get the user's email from their Google/GitHub account
             var userEmail = result.Principal.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
 
-            // List of allowed admin emails - PUT YOUR ACTUAL EMAILS HERE
+            // List of allowed admin emails 
             var adminEmails = new List<string>
             {
                 "nandishandu51@gmail.com",       
@@ -76,7 +74,7 @@ namespace FutureTech_StudentManagement.Controllers
                 TempData["Error"] = "Access Denied: You are not authorized to use this system. Only approved administrators can log in.";
                 return RedirectToAction("Login");
             }
-            // ============================================================
+            
 
             return LocalRedirect(returnUrl);
         }
