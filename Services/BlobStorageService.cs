@@ -27,7 +27,7 @@ namespace FutureTech_StudentManagement.Services
 
         public async Task<string> UploadFileAsync(IFormFile file, string fileName)
         {
-            // Validate file type
+            
             var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
             var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
 
@@ -42,11 +42,11 @@ namespace FutureTech_StudentManagement.Services
                 throw new ArgumentException("File size cannot exceed 5MB.");
             }
 
-            // Resize image
+            
             using var imageStream = new MemoryStream();
             using (var image = await Image.LoadAsync(file.OpenReadStream()))
             {
-                // Resize if image is too large (max 800x800)
+                
                 if (image.Width > 800 || image.Height > 800)
                 {
                     image.Mutate(x => x.Resize(new ResizeOptions
@@ -56,7 +56,7 @@ namespace FutureTech_StudentManagement.Services
                     }));
                 }
 
-                // Save as JPEG for consistency
+                
                 var encoder = new JpegEncoder { Quality = 80 };
                 await image.SaveAsJpegAsync(imageStream, encoder);
                 imageStream.Position = 0;
