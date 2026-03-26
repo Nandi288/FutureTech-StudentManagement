@@ -11,7 +11,7 @@ namespace FutureTech_StudentManagement.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = "/")
         {
-            // If user is already authenticated, redirect to home
+            
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
