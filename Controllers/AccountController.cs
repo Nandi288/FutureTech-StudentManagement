@@ -69,7 +69,7 @@ namespace FutureTech_StudentManagement.Controllers
             // Check if the user's email is authorized
             if (string.IsNullOrEmpty(userEmail) || !adminEmails.Contains(userEmail))
             {
-                // Not authorized - sign them out and show error
+                
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 TempData["Error"] = "Access Denied: You are not authorized to use this system. Only approved administrators can log in.";
                 return RedirectToAction("Login");
