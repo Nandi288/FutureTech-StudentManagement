@@ -60,7 +60,7 @@ builder.Services.AddAuthorization(options =>
                 "thembelihlecele502@gmail.com",
                  "mqwelzanoxolo09@gmail.com",
                 "njabulomazibuko86@gmail.com",
-                "Luyandafortune17@gmail.com"
+                "luyandafortune17@gmail.com"
 
 
 
