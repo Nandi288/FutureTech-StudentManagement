@@ -51,10 +51,10 @@ builder.Services.AddAuthorization(options =>
             var adminEmails = new List<string>
             {
                 "nandishandu51@gmail.com",           
-                "Gugukhanyiswa@gmail.com",       
+                "gugukhanyiswa@gmail.com",       
                 "angelndaba83@gmail.com",
                 "nkanyisomabanga0@gmail.com",
-                "Sfundozuma114@gmail.com",
+                "sfundozuma114@gmail.com",
                 "snepromise0607@gmail.com",
                 "thembelihlecele502@gmail.com",
                  "mqwelzanoxolo09@gmail.com",
