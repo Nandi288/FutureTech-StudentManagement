@@ -65,13 +65,13 @@ namespace FutureTech_StudentManagement.Controllers
             }
         }
 
-        // GET: Student/Create
+        
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Student/Create
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StudentViewModel viewModel)
@@ -166,10 +166,10 @@ namespace FutureTech_StudentManagement.Controllers
                     student.MobileNumber = viewModel.MobileNumber;
                     student.EnrolmentStatus = viewModel.EnrolmentStatus;
 
-                    // Handle profile picture upload
+                    
                     if (viewModel.ProfilePicture != null && viewModel.ProfilePicture.Length > 0)
                     {
-                        // Delete old image if exists
+                        
                         if (!string.IsNullOrEmpty(student.ProfileImageUrl))
                         {
                             var oldBlobName = _blobStorageService.ExtractBlobNameFromUrl(student.ProfileImageUrl);
@@ -179,7 +179,7 @@ namespace FutureTech_StudentManagement.Controllers
                             }
                         }
 
-                        // Upload new image
+                        
                         var fileName = $"{student.Id}{Path.GetExtension(viewModel.ProfilePicture.FileName)}";
                         var imageUrl = await _blobStorageService.UploadFileAsync(viewModel.ProfilePicture, fileName);
                         student.ProfileImageUrl = imageUrl;
